@@ -1,137 +1,165 @@
-import React, { useState } from 'react';
-import { ArrowRight, Award, Users, BookOpen, Trophy, Star, CheckCircle, Home as HomeIcon, Quote, Calendar, Newspaper, GraduationCap, Phone, MapPin, Mail, ChevronDown } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ArrowRight, Award, Users, BookOpen, Trophy, Star, CheckCircle, Home as HomeIcon, Quote, Calendar, Newspaper, GraduationCap, Phone, MapPin, Mail, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 export default function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1920&auto=format&fit=crop",
+      tag: "Ranked #1 CBSE School in Sikar",
+      title: "Where Dreams",
+      highlight: "Take Flight",
+      description: "Sprawled over 100 bighas, Prince Academy combines traditional values with modern innovation to nurture the leaders of tomorrow."
+    },
+    {
+      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1920&auto=format&fit=crop",
+      tag: "Academic Excellence",
+      title: "Empowering Minds",
+      highlight: "For Success",
+      description: "Our world-class faculty and state-of-the-art laboratories provide the perfect environment for academic brilliance."
+    },
+    {
+      image: "https://images.unsplash.com/photo-1526676037777-05a232554f77?q=80&w=1920&auto=format&fit=crop",
+      tag: "Sports & Fitness",
+      title: "Building Future",
+      highlight: "Champions",
+      description: "With professional coaching and Olympic-standard facilities, we nurture the athletic potential of every student."
+    },
+    {
+      image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1920&auto=format&fit=crop",
+      tag: "Innovation Hub",
+      title: "Leading With",
+      highlight: "Technology",
+      description: "From AI and Robotics to advanced computer labs, we prepare students for the digital frontier of the 21st century."
+    },
+    {
+      image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=1920&auto=format&fit=crop",
+      tag: "Holistic Growth",
+      title: "Nurturing Every",
+      highlight: "Individual",
+      description: "We focus on character building, arts, and cultural values to ensure our students grow into responsible global citizens."
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
     <div className="space-y-24 pb-24">
       {/* Hero Section */}
-      <section className="relative h-[85vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <motion.img 
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
-            src="https://picsum.photos/seed/school-hero/1920/1080" 
-            alt="Prince Academy Campus" 
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/90 via-brand-primary/60 to-transparent"></div>
-        </div>
-        <div className="container-custom relative z-10 text-white">
+      <section className="relative h-[90vh] flex items-center overflow-hidden">
+        <AnimatePresence mode="wait">
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl space-y-8"
+            key={currentSlide}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="absolute inset-0 z-0"
           >
-            <div className="inline-flex items-center space-x-2 bg-brand-secondary/20 backdrop-blur-md border border-brand-secondary/30 text-brand-secondary px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
-              <Star size={16} fill="currentColor" />
-              <span>Ranked #1 CBSE School in Sikar</span>
-            </div>
-            <h1 className="text-5xl md:text-8xl font-bold leading-[1.1]">
-              Where Dreams <br />
-              <span className="text-brand-secondary">Take Flight</span>
-            </h1>
-            <p className="text-xl text-slate-200 leading-relaxed max-w-xl">
-              Sprawled over 100 bighas, Prince Academy combines traditional values with modern innovation to nurture the leaders of tomorrow.
-            </p>
-            <div className="flex flex-wrap gap-6 pt-4">
-              <Link to="/apply" className="btn-secondary px-8 py-4 text-lg shadow-lg shadow-brand-secondary/20 flex items-center group">
-                Start Admission <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link to="/about" className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-lg font-semibold hover:bg-white/20 transition-all text-lg">
-                Explore Campus
-              </Link>
-            </div>
+            <motion.img 
+              initial={{ scale: 1.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 6 }}
+              src={slides[currentSlide].image} 
+              alt={slides[currentSlide].title} 
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-black/10"></div>
           </motion.div>
+        </AnimatePresence>
+
+        <div className="container-custom relative z-10 text-white pointer-events-none">
+          {/* Text content removed as per user request */}
         </div>
-        
-        {/* Floating Stats for Desktop */}
-        <div className="absolute bottom-12 right-12 hidden xl:block z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-3xl space-y-4"
-          >
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-brand-secondary rounded-2xl flex items-center justify-center text-white">
-                <Trophy size={24} />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-white">100%</p>
-                <p className="text-xs text-slate-300 uppercase tracking-wider">Board Result</p>
-              </div>
-            </div>
-          </motion.div>
+
+        {/* Slider Controls */}
+        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex items-center space-x-4 z-20">
+          {slides.map((_, i) => (
+            <button 
+              key={i}
+              onClick={() => setCurrentSlide(i)}
+              className={`h-2 rounded-full transition-all duration-300 ${currentSlide === i ? 'w-12 bg-brand-secondary' : 'w-2 bg-white/40 hover:bg-white/60'}`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
         </div>
-        {/* Quick Links for Desktop */}
-        <div className="absolute bottom-0 left-0 w-full hidden lg:block z-10">
-          <div className="container-custom">
-            <div className="bg-white rounded-t-[3rem] shadow-2xl p-8 grid grid-cols-4 gap-8 border-x border-t border-slate-100">
-              {[
-                { name: 'Fee Structure', path: '/academics/fees', icon: Award },
-                { name: 'Admissions', path: '/apply', icon: GraduationCap },
-                { name: 'School News', path: '/news', icon: Newspaper },
-                { name: 'Contact Us', path: '/contact', icon: Phone },
-              ].map((link, i) => (
-                <Link 
-                  key={i} 
-                  to={link.path}
-                  className="flex items-center space-x-4 group p-4 rounded-2xl hover:bg-slate-50 transition-colors"
-                >
-                  <div className="w-12 h-12 bg-blue-50 text-brand-primary rounded-xl flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-colors">
-                    <link.icon size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-slate-800">{link.name}</h4>
-                    <p className="text-xs text-slate-500">Quick access</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
+
+        <div className="absolute top-1/2 -translate-y-1/2 left-8 hidden md:block z-20">
+          <button onClick={prevSlide} className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-brand-secondary hover:border-brand-secondary transition-all">
+            <ChevronLeft size={20} />
+          </button>
+        </div>
+        <div className="absolute top-1/2 -translate-y-1/2 right-8 hidden md:block z-20">
+          <button onClick={nextSlide} className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-brand-secondary hover:border-brand-secondary transition-all">
+            <ChevronRight size={20} />
+          </button>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="container-custom">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {[
-            { label: 'Students', value: '5000+', icon: Users, color: 'blue' },
-            { label: 'Faculty', value: '250+', icon: BookOpen, color: 'amber' },
-            { label: 'Campus Area', value: '100 Bighas', icon: Star, color: 'emerald' },
-            { label: 'Years of Excellence', value: '25+', icon: Trophy, color: 'indigo' },
-          ].map((stat, idx) => (
-            <motion.div 
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 text-center space-y-2 hover:shadow-xl transition-shadow group"
-            >
-              <div className={`w-14 h-14 bg-${stat.color}-50 text-brand-primary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
-                <stat.icon size={28} />
-              </div>
-              <h3 className="text-4xl font-bold text-brand-primary">{stat.value}</h3>
-              <p className="text-slate-500 font-medium uppercase text-xs tracking-widest">{stat.label}</p>
-            </motion.div>
-          ))}
+      {/* Scrolling Stats & Quick Links Bar */}
+      <section className="bg-white border-y border-slate-100 py-4 overflow-hidden -mt-12 relative z-30">
+        <div className="flex overflow-hidden">
+          <motion.div 
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ 
+              duration: 40, 
+              ease: "linear", 
+              repeat: Infinity 
+            }}
+            className="flex items-center space-x-12 whitespace-nowrap px-6"
+          >
+            {[
+              { name: 'Fee Structure', path: '/academics/fees', icon: Award },
+              { name: 'Admissions', path: '/apply', icon: GraduationCap },
+              { name: 'School News', path: '/news', icon: Newspaper },
+              { name: 'Contact Us', path: '/contact', icon: Phone },
+              { name: '5000+ Students', path: '/about', icon: Users },
+              { name: '250+ Faculty', path: '/about', icon: BookOpen },
+              { name: '100 Bighas Campus', path: '/facilities', icon: Star },
+              { name: '25+ Years Legacy', path: '/about', icon: Trophy },
+              // Duplicate for seamless loop
+              { name: 'Fee Structure', path: '/academics/fees', icon: Award },
+              { name: 'Admissions', path: '/apply', icon: GraduationCap },
+              { name: 'School News', path: '/news', icon: Newspaper },
+              { name: 'Contact Us', path: '/contact', icon: Phone },
+              { name: '5000+ Students', path: '/about', icon: Users },
+              { name: '250+ Faculty', path: '/about', icon: BookOpen },
+              { name: '100 Bighas Campus', path: '/facilities', icon: Star },
+              { name: '25+ Years Legacy', path: '/about', icon: Trophy },
+            ].map((item, i) => (
+              <Link 
+                key={i} 
+                to={item.path}
+                className="flex items-center space-x-3 group shrink-0"
+              >
+                <div className="w-8 h-8 bg-blue-50 text-brand-primary rounded-lg flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-colors">
+                  <item.icon size={16} />
+                </div>
+                <span className="font-bold text-slate-700 text-sm group-hover:text-brand-primary transition-colors">{item.name}</span>
+              </Link>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* Academic Excellence Section */}
       <section className="bg-brand-primary py-24 overflow-hidden relative">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48 blur-3xl"></div>
-        <div className="container-custom relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+        <div className="container-custom relative z-10 mb-16">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-8">
             <div className="space-y-4">
               <h2 className="text-brand-secondary font-bold text-sm uppercase tracking-widest">Academic Excellence</h2>
               <h3 className="text-4xl md:text-5xl font-bold text-white leading-tight">Our Shining <span className="text-brand-secondary italic">Stars</span></h3>
@@ -140,40 +168,59 @@ export default function Home() {
               View All Results <ArrowRight size={18} className="ml-2" />
             </Link>
           </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        </div>
+
+        <div className="relative flex overflow-hidden">
+          <motion.div 
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ 
+              duration: 25, 
+              ease: "linear", 
+              repeat: Infinity 
+            }}
+            className="flex space-x-8 px-6"
+          >
             {[
               { name: 'Rahul Sharma', score: '98.6%', class: 'Class XII', img: 'https://picsum.photos/seed/student1/400/500' },
               { name: 'Priya Verma', score: '97.8%', class: 'Class X', img: 'https://picsum.photos/seed/student2/400/500' },
               { name: 'Amit Singh', score: '97.4%', class: 'Class XII', img: 'https://picsum.photos/seed/student3/400/500' },
               { name: 'Sneha Gupta', score: '96.9%', class: 'Class X', img: 'https://picsum.photos/seed/student4/400/500' },
+              { name: 'Vikram Aditya', score: '96.5%', class: 'Class XII', img: 'https://picsum.photos/seed/student5/400/500' },
+              { name: 'Ananya Singh', score: '96.2%', class: 'Class X', img: 'https://picsum.photos/seed/student6/400/500' },
+              { name: 'Rohan Meena', score: '95.8%', class: 'Class XII', img: 'https://picsum.photos/seed/student7/400/500' },
+              { name: 'Ishita Jain', score: '95.5%', class: 'Class X', img: 'https://picsum.photos/seed/student8/400/500' },
+              // Duplicate for seamless loop
+              { name: 'Rahul Sharma', score: '98.6%', class: 'Class XII', img: 'https://picsum.photos/seed/student1/400/500' },
+              { name: 'Priya Verma', score: '97.8%', class: 'Class X', img: 'https://picsum.photos/seed/student2/400/500' },
+              { name: 'Amit Singh', score: '97.4%', class: 'Class XII', img: 'https://picsum.photos/seed/student3/400/500' },
+              { name: 'Sneha Gupta', score: '96.9%', class: 'Class X', img: 'https://picsum.photos/seed/student4/400/500' },
+              { name: 'Vikram Aditya', score: '96.5%', class: 'Class XII', img: 'https://picsum.photos/seed/student5/400/500' },
+              { name: 'Ananya Singh', score: '96.2%', class: 'Class X', img: 'https://picsum.photos/seed/student6/400/500' },
+              { name: 'Rohan Meena', score: '95.8%', class: 'Class XII', img: 'https://picsum.photos/seed/student7/400/500' },
+              { name: 'Ishita Jain', score: '95.5%', class: 'Class X', img: 'https://picsum.photos/seed/student8/400/500' },
             ].map((topper, idx) => (
-              <motion.div 
-                key={topper.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[2.5rem] overflow-hidden group"
+              <div 
+                key={idx}
+                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[2.5rem] overflow-hidden group w-64 shrink-0"
               >
-                <div className="relative h-80 overflow-hidden">
+                <div className="relative h-64 overflow-hidden">
                   <img 
                     src={topper.img} 
                     alt={topper.name} 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute top-4 right-4 bg-brand-secondary text-white px-4 py-1 rounded-full font-bold text-lg">
+                  <div className="absolute top-4 right-4 bg-brand-secondary text-white px-3 py-1 rounded-full font-bold text-sm">
                     {topper.score}
                   </div>
                 </div>
                 <div className="p-6 text-center">
-                  <h4 className="text-xl font-bold text-white">{topper.name}</h4>
-                  <p className="text-blue-200 text-sm">{topper.class}</p>
+                  <h4 className="text-lg font-bold text-white">{topper.name}</h4>
+                  <p className="text-blue-200 text-xs">{topper.class}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
