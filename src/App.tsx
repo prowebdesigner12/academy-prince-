@@ -9,6 +9,7 @@ import Sports from './pages/Sports';
 import Contact from './pages/Contact';
 import Results from './pages/Results';
 import Apply from './pages/Apply';
+import News from './pages/News';
 
 export default function App() {
   return (
@@ -25,6 +26,8 @@ export default function App() {
           <Route path="/results" element={<Results />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/apply" element={<Apply />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/news/:id" element={<News />} />
           {/* Fallback for other routes */}
           <Route path="*" element={<Home />} />
         </Routes>

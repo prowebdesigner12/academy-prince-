@@ -27,9 +27,9 @@ export default function Footer() {
         <div>
           <h3 className="text-lg font-bold mb-6 border-b border-brand-primary pb-2 inline-block">Quick Links</h3>
           <ul className="space-y-3">
-            {['About Us', 'Academics', 'Facilities', 'Sports', 'Results', 'Contact Us'].map((link) => (
+            {['About Us', 'Academics', 'Facilities', 'Sports', 'Results', 'News', 'Contact Us'].map((link) => (
               <li key={link}>
-                <Link to={`/${link.toLowerCase().replace(' ', '-')}`} className="text-slate-400 hover:text-brand-secondary text-sm flex items-center group">
+                <Link to={link === 'Contact Us' ? '/contact' : `/${link.toLowerCase().replace(' ', '-')}`} className="text-slate-400 hover:text-brand-secondary text-sm flex items-center group">
                   <ArrowRight size={14} className="mr-2 opacity-0 group-hover:opacity-100 transition-all -ml-4 group-hover:ml-0" />
                   {link}
                 </Link>

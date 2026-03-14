@@ -33,6 +33,7 @@ const navItems = [
   { name: 'Facilities', path: '/facilities' },
   { name: 'Sports', path: '/sports' },
   { name: 'Results', path: '/results' },
+  { name: 'News', path: '/news' },
   { name: 'Contact', path: '/contact' },
 ];
 
