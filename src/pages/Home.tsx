@@ -77,13 +77,8 @@ export default function Home() {
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-black/10"></div>
           </motion.div>
         </AnimatePresence>
-
-        <div className="container-custom relative z-10 text-white pointer-events-none">
-          {/* Text content removed as per user request */}
-        </div>
 
         {/* Slider Controls */}
         <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex items-center space-x-4 z-20">
@@ -110,16 +105,16 @@ export default function Home() {
       </section>
 
       {/* Scrolling Stats & Quick Links Bar */}
-      <section className="bg-white border-y border-slate-100 py-4 overflow-hidden -mt-12 relative z-30">
+      <section className="bg-white border-y border-slate-100 py-3 overflow-hidden -mt-8 relative z-30 shadow-sm">
         <div className="flex overflow-hidden">
           <motion.div 
             animate={{ x: ["0%", "-50%"] }}
             transition={{ 
-              duration: 40, 
+              duration: 30, 
               ease: "linear", 
               repeat: Infinity 
             }}
-            className="flex items-center space-x-12 whitespace-nowrap px-6"
+            className="flex items-center space-x-16 whitespace-nowrap px-6"
           >
             {[
               { name: 'Fee Structure', path: '/academics/fees', icon: Award },
@@ -130,7 +125,7 @@ export default function Home() {
               { name: '250+ Faculty', path: '/about', icon: BookOpen },
               { name: '100 Bighas Campus', path: '/facilities', icon: Star },
               { name: '25+ Years Legacy', path: '/about', icon: Trophy },
-              // Duplicate for seamless loop
+            ].concat([
               { name: 'Fee Structure', path: '/academics/fees', icon: Award },
               { name: 'Admissions', path: '/apply', icon: GraduationCap },
               { name: 'School News', path: '/news', icon: Newspaper },
@@ -139,16 +134,16 @@ export default function Home() {
               { name: '250+ Faculty', path: '/about', icon: BookOpen },
               { name: '100 Bighas Campus', path: '/facilities', icon: Star },
               { name: '25+ Years Legacy', path: '/about', icon: Trophy },
-            ].map((item, i) => (
+            ]).map((item, i) => (
               <Link 
                 key={i} 
                 to={item.path}
                 className="flex items-center space-x-3 group shrink-0"
               >
-                <div className="w-8 h-8 bg-blue-50 text-brand-primary rounded-lg flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-colors">
-                  <item.icon size={16} />
+                <div className="w-7 h-7 bg-blue-50 text-brand-primary rounded-lg flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-colors">
+                  <item.icon size={14} />
                 </div>
-                <span className="font-bold text-slate-700 text-sm group-hover:text-brand-primary transition-colors">{item.name}</span>
+                <span className="font-bold text-slate-700 text-xs group-hover:text-brand-primary transition-colors uppercase tracking-wider">{item.name}</span>
               </Link>
             ))}
           </motion.div>
@@ -174,7 +169,7 @@ export default function Home() {
           <motion.div 
             animate={{ x: ["0%", "-50%"] }}
             transition={{ 
-              duration: 25, 
+              duration: 35, 
               ease: "linear", 
               repeat: Infinity 
             }}
@@ -189,7 +184,11 @@ export default function Home() {
               { name: 'Ananya Singh', score: '96.2%', class: 'Class X', img: 'https://picsum.photos/seed/student6/400/500' },
               { name: 'Rohan Meena', score: '95.8%', class: 'Class XII', img: 'https://picsum.photos/seed/student7/400/500' },
               { name: 'Ishita Jain', score: '95.5%', class: 'Class X', img: 'https://picsum.photos/seed/student8/400/500' },
-              // Duplicate for seamless loop
+              { name: 'Aryan Khan', score: '95.2%', class: 'Class XII', img: 'https://picsum.photos/seed/student9/400/500' },
+              { name: 'Diya Patel', score: '94.9%', class: 'Class X', img: 'https://picsum.photos/seed/student10/400/500' },
+              { name: 'Kabir Das', score: '94.5%', class: 'Class XII', img: 'https://picsum.photos/seed/student11/400/500' },
+              { name: 'Sanya Mirza', score: '94.2%', class: 'Class X', img: 'https://picsum.photos/seed/student12/400/500' },
+            ].concat([
               { name: 'Rahul Sharma', score: '98.6%', class: 'Class XII', img: 'https://picsum.photos/seed/student1/400/500' },
               { name: 'Priya Verma', score: '97.8%', class: 'Class X', img: 'https://picsum.photos/seed/student2/400/500' },
               { name: 'Amit Singh', score: '97.4%', class: 'Class XII', img: 'https://picsum.photos/seed/student3/400/500' },
@@ -198,25 +197,29 @@ export default function Home() {
               { name: 'Ananya Singh', score: '96.2%', class: 'Class X', img: 'https://picsum.photos/seed/student6/400/500' },
               { name: 'Rohan Meena', score: '95.8%', class: 'Class XII', img: 'https://picsum.photos/seed/student7/400/500' },
               { name: 'Ishita Jain', score: '95.5%', class: 'Class X', img: 'https://picsum.photos/seed/student8/400/500' },
-            ].map((topper, idx) => (
+              { name: 'Aryan Khan', score: '95.2%', class: 'Class XII', img: 'https://picsum.photos/seed/student9/400/500' },
+              { name: 'Diya Patel', score: '94.9%', class: 'Class X', img: 'https://picsum.photos/seed/student10/400/500' },
+              { name: 'Kabir Das', score: '94.5%', class: 'Class XII', img: 'https://picsum.photos/seed/student11/400/500' },
+              { name: 'Sanya Mirza', score: '94.2%', class: 'Class X', img: 'https://picsum.photos/seed/student12/400/500' },
+            ]).map((topper, idx) => (
               <div 
                 key={idx}
-                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[2.5rem] overflow-hidden group w-64 shrink-0"
+                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl overflow-hidden group w-60 shrink-0 shadow-lg"
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-60 overflow-hidden">
                   <img 
                     src={topper.img} 
                     alt={topper.name} 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute top-4 right-4 bg-brand-secondary text-white px-3 py-1 rounded-full font-bold text-sm">
+                  <div className="absolute top-3 right-3 bg-brand-secondary text-white px-2 py-1 rounded-lg font-bold text-xs shadow-lg">
                     {topper.score}
                   </div>
                 </div>
-                <div className="p-6 text-center">
-                  <h4 className="text-lg font-bold text-white">{topper.name}</h4>
-                  <p className="text-blue-200 text-xs">{topper.class}</p>
+                <div className="p-5 text-center">
+                  <h4 className="text-base font-bold text-white group-hover:text-brand-secondary transition-colors">{topper.name}</h4>
+                  <p className="text-blue-200 text-[10px] uppercase tracking-widest mt-1">{topper.class}</p>
                 </div>
               </div>
             ))}
@@ -474,53 +477,52 @@ export default function Home() {
             <h3 className="text-4xl font-bold">Frequently Asked <span className="text-brand-secondary">Questions</span></h3>
           </div>
           
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
             {/* Contact & Map Card */}
             <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 space-y-8"
+              className="bg-white p-8 md:p-10 rounded-[3rem] shadow-xl border border-slate-100 space-y-10"
             >
               <div className="space-y-4">
-                <h4 className="text-2xl font-bold text-slate-900">Get in Touch</h4>
-                <p className="text-slate-500">Have more questions? Our admissions team is here to help you.</p>
+                <h4 className="text-3xl font-bold text-slate-900">Contact Details</h4>
+                <p className="text-slate-500">Reach out to us for any admissions or academic queries.</p>
               </div>
 
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-blue-50 text-brand-primary rounded-2xl flex items-center justify-center shrink-0">
-                    <MapPin size={24} />
+              <div className="grid gap-8">
+                <div className="flex items-start space-x-5">
+                  <div className="w-14 h-14 bg-blue-50 text-brand-primary rounded-2xl flex items-center justify-center shrink-0 shadow-sm">
+                    <MapPin size={28} />
                   </div>
                   <div>
-                    <h5 className="font-bold text-slate-800">Our Location</h5>
-                    <p className="text-sm text-slate-600">Ring Road (Jaipur-Bikaner Bypass), Sikar, Rajasthan - 332001</p>
+                    <h5 className="font-bold text-slate-800 text-lg">Our Campus</h5>
+                    <p className="text-slate-600 leading-relaxed">Ring Road (Jaipur-Bikaner Bypass), Sikar, Rajasthan - 332001</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-amber-50 text-brand-secondary rounded-2xl flex items-center justify-center shrink-0">
-                    <Phone size={24} />
+                <div className="flex items-start space-x-5">
+                  <div className="w-14 h-14 bg-amber-50 text-brand-secondary rounded-2xl flex items-center justify-center shrink-0 shadow-sm">
+                    <Phone size={28} />
                   </div>
                   <div>
-                    <h5 className="font-bold text-slate-800">Phone Numbers</h5>
-                    <p className="text-sm text-slate-600">9610-75-2222, 9610-76-2222</p>
+                    <h5 className="font-bold text-slate-800 text-lg">Call Us</h5>
+                    <p className="text-slate-600">9610-75-2222, 9610-76-2222</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center shrink-0">
-                    <Mail size={24} />
+                <div className="flex items-start space-x-5">
+                  <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center shrink-0 shadow-sm">
+                    <Mail size={28} />
                   </div>
                   <div>
-                    <h5 className="font-bold text-slate-800">Email Address</h5>
-                    <p className="text-sm text-slate-600">princeacademy31@gmail.com</p>
+                    <h5 className="font-bold text-slate-800 text-lg">Email Us</h5>
+                    <p className="text-slate-600">princeacademy31@gmail.com</p>
                   </div>
                 </div>
               </div>
 
-              {/* Map Embed Placeholder */}
-              <div className="w-full h-64 rounded-3xl overflow-hidden border border-slate-100 shadow-inner relative">
+              <div className="w-full h-72 rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-inner relative group">
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3536.844116035174!2d75.16147437546206!3d27.56739697626343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396ca37666666667%3A0x6666666666666666!2sPrince%20Academy%20Sikar!5e0!3m2!1sen!2sin!4v1710400000000!5m2!1sen!2sin" 
                   width="100%" 
@@ -528,61 +530,69 @@ export default function Home() {
                   style={{ border: 0 }} 
                   allowFullScreen={true} 
                   loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
+                  referrerPolicy="no-referrer"
                   title="Prince Academy Location"
+                  className="group-hover:scale-105 transition-transform duration-700"
                 ></iframe>
               </div>
             </motion.div>
 
-            {/* FAQ Accordion */}
-            <div className="space-y-4">
-              {[
-                { q: 'What is the admission process for the new session?', a: 'The admission process involves filling out an online application form, followed by an interaction/test and document verification.' },
-                { q: 'Does the school provide hostel facilities?', a: 'Yes, we have separate, fully-equipped hostels for boys and girls with 24/7 security and nutritious meals.' },
-                { q: 'What is the student-teacher ratio at Prince Academy?', a: 'We maintain an ideal student-teacher ratio of 25:1 to ensure personalized attention for every student.' },
-                { q: 'Are there any extra-curricular activities?', a: 'Absolutely! We offer a wide range of activities including sports, music, dance, robotics, and NCC to ensure holistic development.' },
-                { q: 'Is there a school transport facility?', a: 'Yes, we provide safe and reliable bus services covering all major routes in and around Sikar city.' },
-                { q: 'What curriculum does the school follow?', a: 'Prince Academy is affiliated with CBSE and follows the NCERT curriculum with a focus on modern pedagogical methods.' },
-              ].map((faq, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className={`bg-white rounded-2xl shadow-sm border transition-all duration-300 ${activeFaq === i ? 'border-brand-primary ring-1 ring-brand-primary/10' : 'border-slate-100'}`}
-                >
-                  <button 
-                    onClick={() => setActiveFaq(activeFaq === i ? null : i)}
-                    className="w-full p-6 flex items-center justify-between text-left group"
+            {/* FAQ Accordion Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white p-8 md:p-10 rounded-[3rem] shadow-xl border border-slate-100 space-y-8"
+            >
+              <div className="space-y-4">
+                <h4 className="text-3xl font-bold text-slate-900">FAQ Section</h4>
+                <p className="text-slate-500">Quick answers to common questions about our school.</p>
+              </div>
+
+              <div className="space-y-4">
+                {[
+                  { q: 'What is the admission process?', a: 'The admission process involves filling out an online application form, followed by an interaction/test and document verification.' },
+                  { q: 'Does the school provide hostels?', a: 'Yes, we have separate, fully-equipped hostels for boys and girls with 24/7 security and nutritious meals.' },
+                  { q: 'What is the student-teacher ratio?', a: 'We maintain an ideal student-teacher ratio of 25:1 to ensure personalized attention for every student.' },
+                  { q: 'Are there extra-curricular activities?', a: 'Absolutely! We offer a wide range of activities including sports, music, dance, robotics, and NCC.' },
+                  { q: 'Is there a school transport facility?', a: 'Yes, we provide safe and reliable bus services covering all major routes in and around Sikar city.' },
+                  { q: 'What curriculum do you follow?', a: 'Prince Academy is affiliated with CBSE and follows the NCERT curriculum with modern pedagogical methods.' },
+                ].map((faq, i) => (
+                  <div 
+                    key={i}
+                    className={`rounded-2xl border transition-all duration-300 ${activeFaq === i ? 'border-brand-primary bg-blue-50/30' : 'border-slate-100 bg-slate-50/50 hover:bg-slate-50'}`}
                   >
-                    <h4 className="font-bold text-slate-800 flex items-center">
-                      <span className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 shrink-0 text-xs transition-colors ${activeFaq === i ? 'bg-brand-primary text-white' : 'bg-blue-50 text-brand-primary'}`}>Q</span>
-                      {faq.q}
-                    </h4>
-                    <ChevronDown 
-                      size={20} 
-                      className={`text-slate-400 transition-transform duration-300 ${activeFaq === i ? 'rotate-180 text-brand-primary' : 'group-hover:text-slate-600'}`} 
-                    />
-                  </button>
-                  <AnimatePresence>
-                    {activeFaq === i && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: 'easeInOut' }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-6 pb-6 pl-11 text-slate-600 text-sm leading-relaxed border-t border-slate-50 pt-4">
-                          {faq.a}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
-            </div>
+                    <button 
+                      onClick={() => setActiveFaq(activeFaq === i ? null : i)}
+                      className="w-full p-5 flex items-center justify-between text-left group"
+                    >
+                      <h4 className="font-bold text-slate-800 flex items-center text-sm md:text-base">
+                        <span className={`w-7 h-7 rounded-full flex items-center justify-center mr-3 shrink-0 text-[10px] font-bold transition-colors ${activeFaq === i ? 'bg-brand-primary text-white' : 'bg-white text-brand-primary border border-brand-primary/20'}`}>Q</span>
+                        {faq.q}
+                      </h4>
+                      <ChevronDown 
+                        size={18} 
+                        className={`text-slate-400 transition-transform duration-300 ${activeFaq === i ? 'rotate-180 text-brand-primary' : 'group-hover:text-slate-600'}`} 
+                      />
+                    </button>
+                    <AnimatePresence initial={false}>
+                      {activeFaq === i && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        >
+                          <div className="px-5 pb-5 pl-15 text-slate-600 text-sm leading-relaxed border-t border-slate-100/50 pt-4">
+                            {faq.a}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
